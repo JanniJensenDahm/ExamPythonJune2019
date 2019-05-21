@@ -41,14 +41,17 @@ def saveToMd(urlHome, url1, url2, url3, url5):
     path = "C:\\Users\\janni\\Dropbox\\Datamatiker\\4. Semester\\Python\\Eksamen"
     mdFile = "README.md".format(path)
 
-    #Save header
+    #Header
     h1Home = h1TagOnSite(urlHome)
-    #Save assignments
+    #Links to exam flow and assignments
     aTag = aTagOnSite(urlHome)
+    #List items, Exam Flow
+    listItems = listsOnSite(urlHome)
 
     with open(mdFile, 'w') as fileMd:
-            fileMd.write('#' + ' '.join(h1Home) + '\n* ')
-            fileMd.write('\n* '.join(aTag))
+            fileMd.write('# ' + ' '.join(h1Home) + '\n')
+            fileMd.write('## Links\n* ' + '\n* '.join(aTag) + '\n')
+            fileMd.write('## ' + str(aTag[0]) + '\n* ' + '\n* '.join(listItems))
     
     
 
@@ -70,9 +73,7 @@ def aTagOnSite(url):
     for aTag in allATags:
         print(aTag)
     
-    return(allATags)
-
-    
+    return(allATags) 
 
 #Get all list items on the side
 def listsOnSite(url):
@@ -80,10 +81,10 @@ def listsOnSite(url):
 
     allLists = re.findall(regexFormat, str(url))
 
-    print("What to fullfill before the exam")
     for liList in allLists:
         escapeReplaced = re.sub("\\\\.|[^a-zA-Z' ]+", '', liList)
         print(liList)
-
+    
+    return allLists
 if __name__ == '__main__':
     main()
