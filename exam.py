@@ -44,14 +44,18 @@ def saveToMd(urlHome, url1, url2, url3, url5):
     #Header
     h1Home = h1TagOnSite(urlHome)
     #Links to exam flow and assignments
-    aTag = aTagOnSite(urlHome)
+    aTag = aLinkOnSite(urlHome)
     #List items, Exam Flow
     listItems = listsOnSite(urlHome)
 
+    links = aLinkOnSite(urlHome)
+
     with open(mdFile, 'w') as fileMd:
             fileMd.write('# ' + ' '.join(h1Home) + '\n')
-            fileMd.write('## Links\n* ' + '\n* '.join(aTag) + '\n')
-            fileMd.write('## ' + str(aTag[0]) + '\n* ' + '\n* '.join(listItems))
+            fileMd.write('## Links\n')
+            for key,value in links.items():
+                fileMd.write('* ' + '[%s](%s)' % (key, value) + '\n')
+            #fileMd.write('## ' + str(aTag[0]) + '\n* ' + '\n* '.join(listItems))
     
     
 
@@ -66,14 +70,21 @@ def h1TagOnSite(url):
     return allH1Tags
 
 #Get all a-tags on the site with class="nav-link"
-def aTagOnSite(url):
+def aLinkOnSite(url):
     regexFormat = '<a class="nav-link".*?>(.+?)</a>'
     allATags = re.findall(regexFormat, str(url))
 
-    for aTag in allATags:
-        print(aTag)
+    regexFormat = 'class="nav-link" href="(.+?.html)"'
+    allHrefTags = re.findall(regexFormat, str(url))
+    url = 'https://clbokea.github.io/exam/'
+    allLinks = [url + x for x in allHrefTags]
+
+    aLinks = dict(zip(allATags, allLinks))
+
+    for k,v in aLinks.items():
+        print(k + ' ' + v)
     
-    return(allATags) 
+    return aLinks
 
 #Get all list items on the side
 def listsOnSite(url):
@@ -86,5 +97,11 @@ def listsOnSite(url):
         print(liList)
     
     return allLists
+
+def pTagsOnSite(url):
+    pass
+    #regexFormat = 
+
+
 if __name__ == '__main__':
     main()
