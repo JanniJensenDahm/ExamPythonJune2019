@@ -47,7 +47,7 @@ def saveToMd(urlHome, url1, url2, url3, url5):
     aTag = aTagOnSite(urlHome)
 
     with open(mdFile, 'w') as fileMd:
-            fileMd.write(' '.join(h1Home) + '\n* ')
+            fileMd.write('#' + ' '.join(h1Home) + '\n* ')
             fileMd.write('\n* '.join(aTag))
     
     
@@ -67,7 +67,6 @@ def aTagOnSite(url):
     regexFormat = '<a class="nav-link".*?>(.+?)</a>'
     allATags = re.findall(regexFormat, str(url))
 
-    print("Links for the exam")
     for aTag in allATags:
         print(aTag)
     

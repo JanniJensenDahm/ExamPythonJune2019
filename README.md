@@ -1,4 +1,4 @@
-Exam, Python elective Spring 2019
+#Exam, Python elective Spring 2019
 * Exam flow
 * Assignment 1
 * Assingment 2
