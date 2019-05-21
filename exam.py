@@ -43,19 +43,17 @@ def saveToMd(urlHome, url1, url2, url3, url5):
 
     #Header
     h1Home = h1TagOnSite(urlHome)
-    #Links to exam flow and assignments
-    aTag = aLinkOnSite(urlHome)
+    #Get links and linktext as a DICTIONARY
+    links = aLinkOnSite(urlHome)
     #List items, Exam Flow
     listItems = listsOnSite(urlHome)
-
-    links = aLinkOnSite(urlHome)
 
     with open(mdFile, 'w') as fileMd:
             fileMd.write('# ' + ' '.join(h1Home) + '\n')
             fileMd.write('## Links\n')
             for key,value in links.items():
                 fileMd.write('* ' + '[%s](%s)' % (key, value) + '\n')
-            #fileMd.write('## ' + str(aTag[0]) + '\n* ' + '\n* '.join(listItems))
+            fileMd.write('## ' + str(list(links.keys())[0]) + '\n* ' + '\n* '.join(listItems))
     
     
 
