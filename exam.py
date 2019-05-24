@@ -37,7 +37,7 @@ def main():
 
     saveToMd(htmlTextHome, htmlTextAss1, htmlTextAss2, htmlTextAss3, htmlTextAss4)
 
-def saveToMd(urlHome, url1, url2, url3, url5):
+def saveToMd(urlHome, url1, url2, url3, url4):
     path = "C:\\Users\\janni\\Dropbox\\Datamatiker\\4. Semester\\Python\\Eksamen"
     mdFile = "README.md".format(path)
 
@@ -46,14 +46,23 @@ def saveToMd(urlHome, url1, url2, url3, url5):
     #Get links and linktext as a DICTIONARY
     links = aLinkOnSite(urlHome)
     #List items, Exam Flow
-    listItems = listsOnSite(urlHome)
+    listHome = listsOnSite(urlHome)
+    #Paragraphs, assignment 1-4
+    pAss1 = pTagsOnSite(url1)
+    pAss2 = pTagsOnSite(url2)
+    listAss3 = listsOnSite(url3)
+    pAss4 = pTagsOnSite(url4)
 
     with open(mdFile, 'w') as fileMd:
             fileMd.write('# ' + ' '.join(h1Home) + '\n')
             fileMd.write('## Links\n')
             for key,value in links.items():
                 fileMd.write('* ' + '[%s](%s)' % (key, value) + '\n')
-            fileMd.write('## ' + str(list(links.keys())[0]) + '\n* ' + '\n* '.join(listItems))
+            fileMd.write('### ' + str(list(links.keys())[0]) + '\n* ' + '\n* '.join(listHome) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[1]) + '\n* ' + '\n* '.join(pAss1) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[2]) + '\n* ' + '\n* '.join(pAss2) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[3]) + '\n* ' + '\n* '.join(listAss3) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[4]) + '\n* ' + '\n* '.join(pAss4) + '\n')
     
     
 
@@ -97,8 +106,11 @@ def listsOnSite(url):
     return allLists
 
 def pTagsOnSite(url):
-    pass
-    #regexFormat = 
+    regexFormat = '<p>(.+?)</p>'
+
+    allP = re.findall(regexFormat, str(url))
+
+    return allP
 
 
 if __name__ == '__main__':
