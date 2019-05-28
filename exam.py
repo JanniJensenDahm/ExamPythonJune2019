@@ -95,7 +95,7 @@ def aLinkOnSite(url):
 
 #Get all list items on the side
 def listsOnSite(url):
-    regexFormat = '<li>(.+?)</li>'
+    regexFormat = '(?s)<li>(.+?)</li>'
 
     allLists = re.findall(regexFormat, str(url))
 
