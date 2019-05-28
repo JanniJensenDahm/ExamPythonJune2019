@@ -7,8 +7,8 @@
 * [Assingment 4](https://clbokea.github.io/exam/assignment_4.html)
 ### Exam flow
 * 2-3 min. presentation and demo of your project (not the code)
-                <ul>
-                    <li>Be sure to demonstrate that you solved the tasks stated in the requirements.
+                
+                    Be sure to demonstrate that you solved the tasks stated in the requirements.
 * 7-8 min. questions about your project (here we look at your code)
 * 10-12 min. general questions based on the curriculum
 * 5 min. grading and feedback
@@ -29,8 +29,14 @@
 * The code should be tested and you should at the exam be abel to talk about your tests and demonstrate
                 them.
 ### Assignment 1
+* Choose a website of your own choice or use <a href="https://clbokea.github.io/exam/index.html">this website</a>
+            crawl it and "scrape" it.
 * The content of the website should be saved in markdown formatted files on your computer.
 * It can be a good idea to choose a relatively small website.
+* It can also be a good idea to have some sort of limit on which links you want to follow.
+        
+* What you choose to retrieve from the crawled site is up to you. But you should describe why you choose to do
+            like you did.
 * A html page looking like this:
 * Becomes:
 * The links to follow (crawl) would in this case be "about.html" and "contact.html"
@@ -49,5 +55,7 @@
                 able to export search results in json and and html formats as well. 
 ### Assingment 4
 * The last option is to create an application of your own choice.
+* You can create whatever you want, as long as you can show me (Claus) a precise requirements specification
+            before you start, and get it approved.
 * It is important, that you at the exam precisely demonstrate the fulfilments of these requirements. 
 * When your requirements have been approved, they can not be changed.

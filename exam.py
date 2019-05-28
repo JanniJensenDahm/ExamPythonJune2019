@@ -98,15 +98,19 @@ def listsOnSite(url):
     regexFormat = '(?s)<li>(.+?)</li>'
 
     allLists = re.findall(regexFormat, str(url))
+    allListsMod = list()
 
     for liList in allLists:
-        escapeReplaced = re.sub("\\\\.|[^a-zA-Z' ]+", '', liList)
+        regexFormat = re.compile(r'<.*?>')
+        newString = regexFormat.sub('', liList)
+        allListsMod.append(newString)
+        #escapeReplaced = re.sub("\\\\.|[^a-zA-Z' ]+", '', liList)
         print(liList)
     
-    return allLists
+    return allListsMod
 
 def pTagsOnSite(url):
-    regexFormat = '<p>(.+?)</p>'
+    regexFormat = '(?s)<p>(.+?)</p>'
 
     allP = re.findall(regexFormat, str(url))
 
