@@ -39,19 +39,25 @@ def main():
 
 def saveToMd(urlHome, url1, url2, url3, url4):
     path = "C:\\Users\\janni\\Dropbox\\Datamatiker\\4. Semester\\Python\\Eksamen"
-    mdFile = "README.md".format(path)
+    mdFile = "WebScrape.md".format(path)
 
     #Header
     h1Home = h1TagOnSite(urlHome)
+    h1Ass1 = h1TagOnSite(url1)
+    h1Ass2 = h1TagOnSite(url2)
+    h1Ass3 = h1TagOnSite(url3)
+    h1Ass4 = h1TagOnSite(url4)
     #Get links and linktext as a DICTIONARY
     links = aLinkOnSite(urlHome)
-    #List items, Exam Flow
+    #List items
     listHome = listsOnSite(urlHome)
-    #Paragraphs, assignment 1-4
+    listAss3 = listsOnSite(url3)
+    #Paragraphs
     pAss1 = pTagsOnSite(url1)
     pAss2 = pTagsOnSite(url2)
-    listAss3 = listsOnSite(url3)
     pAss4 = pTagsOnSite(url4)
+    #Get image on side
+    
 
     with open(mdFile, 'w') as fileMd:
             fileMd.write('# ' + ' '.join(h1Home) + '\n')
@@ -59,10 +65,12 @@ def saveToMd(urlHome, url1, url2, url3, url4):
             for key,value in links.items():
                 fileMd.write('* ' + '[%s](%s)' % (key, value) + '\n')
             fileMd.write('### ' + str(list(links.keys())[0]) + '\n* ' + '\n* '.join(listHome) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[1]) + '\n* ' + '\n* '.join(pAss1) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[2]) + '\n* ' + '\n* '.join(pAss2) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[3]) + '\n* ' + '\n* '.join(listAss3) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[4]) + '\n* ' + '\n* '.join(pAss4) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[1]) + '\n#### ' + '\n '.join(h1Ass1))
+            for line in pAss1[:5]:
+                fileMd.write('\n* %s' % (line) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[2]) + '\n#### ' + '\n '.join(h1Ass2) + '\n* ' + '\n* '.join(pAss2) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[3]) + '\n#### ' + '\n '.join(h1Ass3) + '\n* ' + '\n* '.join(listAss3) + '\n')
+            fileMd.write('### ' + str(list(links.keys())[4]) + '\n#### ' + '\n '.join(h1Ass4) + '\n* ' + '\n* '.join(pAss4) + '\n')
     
     
 
@@ -71,12 +79,12 @@ def h1TagOnSite(url):
     regexFormat = '<h1>(.+?)</h1>'
     allH1Tags = re.findall(regexFormat, str(url))
 
-    for h1Tag in allH1Tags: 
-        print(h1Tag)
+    for h1 in allH1Tags:
+        print(h1)
 
     return allH1Tags
 
-#Get all a-tags on the site with class="nav-link"
+#Get all the a-tags on the site with class="nav-link"
 def aLinkOnSite(url):
     regexFormat = '<a class="nav-link".*?>(.+?)</a>'
     allATags = re.findall(regexFormat, str(url))
@@ -87,13 +95,10 @@ def aLinkOnSite(url):
     allLinks = [url + x for x in allHrefTags]
 
     aLinks = dict(zip(allATags, allLinks))
-
-    for k,v in aLinks.items():
-        print(k + ' ' + v)
     
     return aLinks
 
-#Get all list items on the side
+#Get all the list items on the side
 def listsOnSite(url):
     regexFormat = '(?s)<li>(.+?)</li>'
 
@@ -104,17 +109,26 @@ def listsOnSite(url):
         regexFormat = re.compile(r'<.*?>')
         newString = regexFormat.sub('', liList)
         allListsMod.append(newString)
-        #escapeReplaced = re.sub("\\\\.|[^a-zA-Z' ]+", '', liList)
-        print(liList)
     
     return allListsMod
 
+#Get all the p-tags on site
 def pTagsOnSite(url):
     regexFormat = '(?s)<p>(.+?)</p>'
 
     allP = re.findall(regexFormat, str(url))
 
     return allP
+
+#Get image from site
+def imageOnSite(url):
+    regexFormat = '(<imag.*?>)'
+
+    allImg = re.findall(regexFormat, url.decode())
+
+    for image in allImg:
+        print(image)
+    return allImg
 
 
 if __name__ == '__main__':
