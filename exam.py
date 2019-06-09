@@ -42,7 +42,7 @@ def saveToMd(urlHome, url1, url2, url3, url4):
     mdFile = "WebScrape.md".format(path)
     urlList = [url1, url2, url3, url4]
 
-    #Header
+    #Headers
     h1Home = h1TagOnSite(urlHome)
     h1Ass1 = h1TagOnSite(url1)
     h1Ass2 = h1TagOnSite(url2)
@@ -53,11 +53,11 @@ def saveToMd(urlHome, url1, url2, url3, url4):
     #List items
     listHome = listsOnSite(urlHome)
     listAss3 = listsOnSite(url3)
-    #Paragraphs
+    #paragraphs
     pAss1 = pTagsOnSite(url1)
     pAss2 = pTagsOnSite(url2)
     pAss4 = pTagsOnSite(url4)
-    #Get image on side
+    #Images
     imgList = imageOnSite(urlList)
 
     
@@ -93,7 +93,7 @@ def saveToMd(urlHome, url1, url2, url3, url4):
     
     
 
-#Get H1 from site
+#Get H1
 def h1TagOnSite(url):
     regexFormat = '<h1>(.+?)</h1>'
     allH1Tags = re.findall(regexFormat, str(url))
@@ -103,7 +103,7 @@ def h1TagOnSite(url):
 
     return allH1Tags
 
-#Get all the a-tags on the site with class="nav-link"
+#Get all the a-tags with class="nav-link"
 def aLinkOnSite(url):
     regexFormat = '<a class="nav-link".*?>(.+?)</a>'
     allATags = re.findall(regexFormat, str(url))
@@ -117,7 +117,7 @@ def aLinkOnSite(url):
     
     return aLinks
 
-#Get all the list items on the side
+#Get all the list items
 def listsOnSite(url):
     regexFormat = '(?s)<li>(.+?)</li>'
 
@@ -131,14 +131,15 @@ def listsOnSite(url):
     
     return allListsMod
 
-#Get all the p-tags on site
+#Get all the p-tags
 def pTagsOnSite(url):
     regexFormat = '(?s)<p>(.+?)</p>'
 
     allP = re.findall(regexFormat, str(url))
 
     return allP
-    
+
+#Get img from webpage
 def imageOnSite(urlList):
     regexFormat = 'img src="(.*?)"'
     baseUrl = 'https://clbokea.github.io/exam/'
