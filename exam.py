@@ -38,8 +38,9 @@ def main():
     saveToMd(htmlTextHome, htmlTextAss1, htmlTextAss2, htmlTextAss3, htmlTextAss4)
 
 def saveToMd(urlHome, url1, url2, url3, url4):
-    path = "C:\\Users\\janni\\Dropbox\\Datamatiker\\4. Semester\\Python\\Eksamen"
+    path = "C:/Users/janni/Dropbox/Datamatiker/4. Semester/Python/Eksamen/"
     mdFile = "WebScrape.md".format(path)
+    urlList = [url1, url2, url3, url4]
 
     #Header
     h1Home = h1TagOnSite(urlHome)
@@ -57,20 +58,38 @@ def saveToMd(urlHome, url1, url2, url3, url4):
     pAss2 = pTagsOnSite(url2)
     pAss4 = pTagsOnSite(url4)
     #Get image on side
+    imgList = imageOnSite(urlList)
+
     
 
     with open(mdFile, 'w') as fileMd:
-            fileMd.write('# ' + ' '.join(h1Home) + '\n')
-            fileMd.write('## Links\n')
-            for key,value in links.items():
-                fileMd.write('* ' + '[%s](%s)' % (key, value) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[0]) + '\n* ' + '\n* '.join(listHome) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[1]) + '\n#### ' + '\n '.join(h1Ass1))
-            for line in pAss1[:5]:
-                fileMd.write('\n* %s' % (line) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[2]) + '\n#### ' + '\n '.join(h1Ass2) + '\n* ' + '\n* '.join(pAss2) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[3]) + '\n#### ' + '\n '.join(h1Ass3) + '\n* ' + '\n* '.join(listAss3) + '\n')
-            fileMd.write('### ' + str(list(links.keys())[4]) + '\n#### ' + '\n '.join(h1Ass4) + '\n* ' + '\n* '.join(pAss4) + '\n')
+        #Over all save to .md file
+        fileMd.write('# ' + ' '.join(h1Home) + '\n')
+        fileMd.write('## Links\n')
+        for key,value in links.items():
+            fileMd.write('* ' + '[%s](%s)' % (key, value) + '\n')
+        fileMd.write('### ' + str(list(links.keys())[0]) + '\n* ' + '\n* '.join(listHome) + '\n')
+
+        #Assignment 1, save to .md file
+        fileMd.write('### ' + str(list(links.keys())[1]) + '\n#### ' + '\n '.join(h1Ass1) + '\n')
+        fileMd.write('![](' + str(imgList[0]) + ')\n')
+        for line in pAss1[:5]:
+            fileMd.write('\n* %s' % (line) + '\n')
+
+        #Assignment 2, save to .md file
+        fileMd.write('### ' + str(list(links.keys())[2]) + '\n#### ' + ''.join(h1Ass2) + '\n')
+        fileMd.write('![](' + str(imgList[1]) + ')\n')
+        fileMd.write('* ' + '\n* '.join(pAss2) + '\n')
+
+        #Assignment 3, save to .md file
+        fileMd.write('### ' + str(list(links.keys())[3]) + '\n#### ' + '\n '.join(h1Ass3) + '\n')
+        fileMd.write('![](' + str(imgList[2]) + ')\n')
+        fileMd.write('* ' + '\n* '.join(listAss3) + '\n')
+
+        #Assignment 4, save to .md file
+        fileMd.write('### ' + str(list(links.keys())[4]) + '\n#### ' + '\n '.join(h1Ass4) + '\n')
+        fileMd.write('![](' + str(imgList[3]) + ')\n')
+        fileMd.write('* ' + '\n* '.join(pAss4) + '\n')
     
     
 
@@ -119,17 +138,16 @@ def pTagsOnSite(url):
     allP = re.findall(regexFormat, str(url))
 
     return allP
-
-#Get image from site
-def imageOnSite(url):
-    regexFormat = '(<imag.*?>)'
-
-    allImg = re.findall(regexFormat, url.decode())
-
-    for image in allImg:
-        print(image)
-    return allImg
-
+    
+def imageOnSite(urlList):
+    regexFormat = 'img src="(.*?)"'
+    baseUrl = 'https://clbokea.github.io/exam/'
+    imgList = list()
+    for url in urlList:
+        allImg = re.findall(regexFormat, str(url))
+        imgUrl = baseUrl + allImg[1]
+        imgList.append(imgUrl)
+    return imgList
 
 if __name__ == '__main__':
     main()

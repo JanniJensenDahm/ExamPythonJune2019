@@ -30,6 +30,8 @@
                 them.
 ### Assignment 1
 #### Crawl a web site and save the content in markdown
+![](https://clbokea.github.io/exam/src/main-qimg-c224920a6f3ae3f8089ccd1e8dad65af.jpeg)
+
 * Choose a website of your own choice or use <a href="https://clbokea.github.io/exam/index.html">this website</a>
             crawl it and "scrape" it.
 
@@ -44,10 +46,12 @@
             like you did.
 ### Assingment 2
 #### Blackjack
+![](https://clbokea.github.io/exam/src/how-do-you-play-blackjack.jpg)
 * The rules of the game can be found here: <a href="https://en.wikipedia.org/wiki/Blackjack">Black Jack Rules</a>
 * If you like you can see some more pictures of the game on this <a href="black_jack_pics.html">site</a>
 ### Assingment 3
 #### Help the police find the criminals
+![](https://clbokea.github.io/exam/src/hkad5cxcfifayeqkfc0d.jpeg )
 * In the application you should be able to search for crimes based on the data in the different columns in
                 the dataset.
 * The application should be able to take a gps point (lon-lat) and return a list of crimes made within a
@@ -59,6 +63,7 @@
                 able to export search results in json and and html formats as well. 
 ### Assingment 4
 #### An application of your own choice.
+![](https://clbokea.github.io/exam/src/photodune-9547214-cute-pupil-thinking-against-idea-doodle-with-arrows-xxl-1-1600x898.jpg)
 * The last option is to create an application of your own choice.
 * You can create whatever you want, as long as you can show me (Claus) a precise requirements specification
             before you start, and get it approved.
