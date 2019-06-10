@@ -2,10 +2,14 @@ from urllib.request import urlopen
 import urllib.request
 import re
 
+#Global variable
+mdFile = ''
+htmlTextHome = ''
+
 def main():
     #Make a request to the webpage and make it readable
-
     #Homepage
+    global htmlTextHome
     with urlopen('https://clbokea.github.io/exam/index.html') as responseHome:
         htmlHome = responseHome.read()
     encoding = responseHome.headers.get_content_charset('utf-8')
@@ -35,9 +39,11 @@ def main():
     encoding = responseAss4.headers.get_content_charset('utf-8')
     htmlTextAss4 = htmlAss4.decode(encoding)
 
+    #Start web crawling
     saveToMd(htmlTextHome, htmlTextAss1, htmlTextAss2, htmlTextAss3, htmlTextAss4)
 
 def saveToMd(urlHome, url1, url2, url3, url4):
+    global mdFile
     path = "C:/Users/janni/Dropbox/Datamatiker/4. Semester/Python/Eksamen/"
     mdFile = "WebScrape.md".format(path)
     urlList = [url1, url2, url3, url4]
@@ -97,9 +103,6 @@ def saveToMd(urlHome, url1, url2, url3, url4):
 def h1TagOnSite(url):
     regexFormat = '<h1>(.+?)</h1>'
     allH1Tags = re.findall(regexFormat, str(url))
-
-    for h1 in allH1Tags:
-        print(h1)
 
     return allH1Tags
 
