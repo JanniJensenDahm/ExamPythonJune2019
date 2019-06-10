@@ -5,6 +5,7 @@ import re
 #Global variable
 mdFile = ''
 htmlTextHome = ''
+urlList = list()
 
 def main():
     #Make a request to the webpage and make it readable
@@ -44,6 +45,7 @@ def main():
 
 def saveToMd(urlHome, url1, url2, url3, url4):
     global mdFile
+    global urlList
     path = "C:/Users/janni/Dropbox/Datamatiker/4. Semester/Python/Eksamen/"
     mdFile = "WebScrape.md".format(path)
     urlList = [url1, url2, url3, url4]
@@ -66,8 +68,7 @@ def saveToMd(urlHome, url1, url2, url3, url4):
     #Images
     imgList = imageOnSite(urlList)
 
-    
-
+    #Save to .md file
     with open(mdFile, 'w') as fileMd:
         #Over all save to .md file
         fileMd.write('# ' + ' '.join(h1Home) + '\n')
