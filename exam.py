@@ -60,10 +60,10 @@ def saveToMd(urlHome, url1, url2, url3, url4):
     links = aLinkOnSite(urlHome)
     #List items
     listHome = listsOnSite(urlHome)
+    listAss2 = listsOnSite(url2)
     listAss3 = listsOnSite(url3)
     #paragraphs
     pAss1 = pTagsOnSite(url1)
-    pAss2 = pTagsOnSite(url2)
     pAss4 = pTagsOnSite(url4)
     #Images
     imgList = imageOnSite(urlList)
@@ -86,7 +86,7 @@ def saveToMd(urlHome, url1, url2, url3, url4):
         #Assignment 2, save to .md file
         fileMd.write('### ' + str(list(links.keys())[2]) + '\n#### ' + ''.join(h1Ass2) + '\n')
         fileMd.write('![](' + str(imgList[1]) + ')\n')
-        fileMd.write('* ' + '\n* '.join(pAss2) + '\n')
+        fileMd.write('* ' + '\n* '.join(listAss2) + '\n')
 
         #Assignment 3, save to .md file
         fileMd.write('### ' + str(list(links.keys())[3]) + '\n#### ' + '\n '.join(h1Ass3) + '\n')
