@@ -1,16 +1,13 @@
 from urllib.request import urlopen
 import urllib.request
 import re
+import requests
 
 #Global variable
-mdFile = ''
-htmlTextHome = ''
-urlList = list()
 
 def main():
     #Make a request to the webpage and make it readable
     #Homepage
-    global htmlTextHome
     with urlopen('https://clbokea.github.io/exam/index.html') as responseHome:
         htmlHome = responseHome.read()
     encoding = responseHome.headers.get_content_charset('utf-8')
@@ -44,8 +41,6 @@ def main():
     saveToMd(htmlTextHome, htmlTextAss1, htmlTextAss2, htmlTextAss3, htmlTextAss4)
 
 def saveToMd(urlHome, url1, url2, url3, url4):
-    global mdFile
-    global urlList
     path = "C:/Users/janni/Dropbox/Datamatiker/4. Semester/Python/Eksamen/"
     mdFile = "WebScrape.md".format(path)
     urlList = [url1, url2, url3, url4]
@@ -98,8 +93,6 @@ def saveToMd(urlHome, url1, url2, url3, url4):
         fileMd.write('![](' + str(imgList[3]) + ')\n')
         fileMd.write('* ' + '\n* '.join(pAss4) + '\n')
     
-    
-
 #Get H1
 def h1TagOnSite(url):
     regexFormat = '<h1>(.+?)</h1>'
@@ -153,6 +146,14 @@ def imageOnSite(urlList):
         imgUrl = baseUrl + allImg[1]
         imgList.append(imgUrl)
     return imgList
+
+#Test connection
+def url_connection(url):
+    response = requests.get(url)
+    if response.ok:
+        return response.text
+    else:
+        return 'Bad Response!'
 
 if __name__ == '__main__':
     main()
