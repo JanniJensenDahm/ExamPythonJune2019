@@ -7,7 +7,7 @@ class testMain(unittest.TestCase):
 
     #Run program
     def setUp(self):
-        #exam.main()
+        exam.main()
         self.url = 'https://clbokea.github.io/exam/index.html'
 
     #Returns true if filename is WebSacrape.md
